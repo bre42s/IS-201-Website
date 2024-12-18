@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .choices button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .sad-emoji {
+      font-size: 48px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <a href="../index.html" id="top">Home</a>
+  <h1>Rock, Paper, Scissors</h1>
+  <p>Choose your move:</p>
+  <div class="choices">
+    <button onclick="playGame('Rock')">Rock</button>
+    <button onclick="playGame('Paper')">Paper</button>
+    <button onclick="playGame('Scissors')">Scissors</button>
+  </div>
+  <div class="result" id="result"></div>
+
+  <script>
+    function playGame(playerChoice) {
+      const choices = ['Rock', 'Paper', 'Scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let resultMessage = '';
+      let isWin = false;
+      let isLose = false;
+
+      if (playerChoice === computerChoice) {
+        resultMessage = 'It\'s a Tie!';
+      } else if (
+        (playerChoice === 'Rock' && computerChoice === 'Scissors') ||
+        (playerChoice === 'Paper' && computerChoice === 'Rock') ||
+        (playerChoice === 'Scissors' && computerChoice === 'Paper')
+      ) {
+        resultMessage = 'You Win!';
+        isWin = true;
+      } else {
+        resultMessage = 'You Lose!';
+        isLose = true;
+      }
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `
+        You chose <b>${playerChoice}</b>, 
+        Computer chose <b>${computerChoice}</b><br>
+        <span>${resultMessage}</span>
+      `;
+
+      // Clear any existing sad emoji or confetti
+      resultDiv.classList.remove('sad-emoji');
+
+      // Handle win or lose animations
+      if (isWin) {
+        launchConfetti();
+      } else if (isLose) {
+        resultDiv.innerHTML += `<br><span class="sad-emoji">😢</span>`;
+      }
+    }
+
+    // Confetti function
+    function launchConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { x: 0.5, y: 0.5 } // Center of the screen
+      });
+    }
+  </script>
+</body>
+</html>
