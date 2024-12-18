@@ -12,13 +12,16 @@ li {
 a {color: rgb(3, 63, 28);
     text-decoration: none;
 }
+h1 {
+    color: antiquewhite;
+}
 
 a:hover {
     text-decoration: underline;
     font-weight: bold;
 }
 a:visited {
-    color: rgb(90, 8, 83);
+    color: rgb(255, 255, 255);
 }
 .listHeading {
     font-weight: bold;
@@ -29,7 +32,8 @@ a:visited {
 .justify {text-align: justify;}
 
 .homebg {
-    background-image: url('../images/leaf\ background.jpg');
+    background-color: rgba(255, 255, 255, 0.5);
+    background-image: url(../images/greatest\ risk.jpg);
     background-position: top center;
     background-repeat: repeat;
 }
